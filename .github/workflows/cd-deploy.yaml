@@ -38,21 +38,21 @@ jobs:
           aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
       - name: Deploy MongoDB chart
         run: |
-          helm upgrade --install mongodb ./wanderlust-chart/mongodb \
+          helm upgrade --install mongodb ./wanderlust-chart/charts/mongodb \
             --namespace wanderlust --create-namespace
       - name: Deploy Redis chart
         run: |
-          helm upgrade --install redis ./wanderlust-chart/redis \
+          helm upgrade --install redis ./wanderlust-chart/charts/redis \
             --namespace wanderlust
       - name: Deploy Backend chart
         run: |
-          helm upgrade --install backend ./wanderlust-chart/backend \
+          helm upgrade --install backend ./wanderlust-chart/charts/backend \
             --namespace wanderlust \
             --set image.repository=$ECR_BACKEND \
             --set image.tag=${{ github.event.inputs.image_tag }}
       - name: Deploy Frontend chart
         run: |
-          helm upgrade --install frontend ./wanderlust-chart/frontend \
+          helm upgrade --install frontend ./wanderlust-chart/charts/frontend \
             --namespace wanderlust \
             --set image.repository=$ECR_FRONTEND \
             --set image.tag=${{ github.event.inputs.image_tag }}
