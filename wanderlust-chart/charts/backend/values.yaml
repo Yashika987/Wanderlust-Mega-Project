@@ -1,0 +1,11 @@
+replicaCount: 1
+image:
+  repository: 713881790523.dkr.ecr.us-east-2.amazonaws.com/wanderlust/backend
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  port: 8080
+  nodePort: 31100
+containerPort: 8080
+namespace: wanderlust

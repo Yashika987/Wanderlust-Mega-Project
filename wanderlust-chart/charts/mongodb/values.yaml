@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: mongo
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 27017
+
+namespace: wanderlust
+
+volume:
+  name: mongo-storage
+  mountPath: /data/db
+  pvcName: mongo-pvc
+  pvName: mongo-pv
+  storage: 5Gi
+  hostPath: /data/db

@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: redis
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 6379
+
+namespace: wanderlust
+
+volume:
+  name: mongo-storage
+  mountPath: /var/lib/redis/dump.rdb
+  pvcName: mongo-pvc
