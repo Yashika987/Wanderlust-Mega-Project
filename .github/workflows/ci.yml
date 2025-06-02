@@ -42,5 +42,6 @@ jobs:
         with:
           workflow: cd-deploy.yaml
           token: ${{ secrets.GITHUB_TOKEN }}
+          ref: devops
           inputs: '{"image_tag": "${{ env.IMAGE_TAG }}"}'
 
