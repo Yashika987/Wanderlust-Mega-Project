@@ -41,7 +41,7 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: cd-deploy.yaml
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           ref: devops
           inputs: '{"image_tag": "${{ env.IMAGE_TAG }}"}'
 
