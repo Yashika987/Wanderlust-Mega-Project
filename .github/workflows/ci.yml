@@ -1,0 +1,36 @@
+name: Build and Push to ECR
+on: 
+  push: 
+    branches: 
+    - main
+    - devops
+permissions:
+  id-token: write
+  contents: read
+env: 
+  AWS_REGION: us-east-2
+  BACKEND_REPO: 713881790523.dkr.ecr.us-east-2.amazonaws.com/wanderlust/backend
+  FRONTEND_REPO: 713881790523.dkr.ecr.us-east-2.amazonaws.com/wanderlust/frontend
+  IMAGE_TAG: ${{ github.sha }}
+jobs: 
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout source code  
+        uses: actions/checkout@v4
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with: 
+          role-to-assume: arn:aws:iam::713881790523:role/GitHubActionsOIDCRole
+          aws-region: us-east-2
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+      - name: Buid backend image  
+        run: |
+          docker build -t ${{ env.BACKEND_REPO }}:${{ env.IMAGE_TAG }} ./backend
+          docker push ${{ env.BACKEND_REPO }}:${{ env.IMAGE_TAG }}
+      - name: Buid frontend image  
+        run: |
+          docker build -t ${{ env.FRONTEND_REPO }}:${{ env.IMAGE_TAG }} ./frontend
+          docker push ${{ env.FRONTEND_REPO }}:${{ env.IMAGE_TAG }}
