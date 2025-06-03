@@ -60,5 +60,14 @@ jobs:
         run: |
           helm upgrade --install ingress ./wanderlust-chart/charts/ingress \
             --namespace wanderlust
+      - name: Deploy Monitoring (Grafana + Prometheus)
+        run: |
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo update
+          helm upgrade --install monitoring prometheus-community/kube-prometheus-stack \
+            --namespace monitoring --create-namespace \
+            -f wanderlust-chart/charts/monitoring/values.yaml
+
+
 
   

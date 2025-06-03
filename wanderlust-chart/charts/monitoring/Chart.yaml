@@ -1,0 +1,10 @@
+apiVersion: v2
+name: monitoring
+description: Monitoring stack with Prometheus, Grafana, Alertmanager, and exporters
+type: application
+version: 0.1.0
+appVersion: "45.6.0"  # optional: kube-prometheus-stack version
+dependencies:
+  - name: kube-prometheus-stack
+    version: "45.6.0"  # get latest compatible version from Prometheus community chart
+    repository: "https://prometheus-community.github.io/helm-charts"

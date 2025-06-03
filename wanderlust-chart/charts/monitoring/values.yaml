@@ -1,0 +1,39 @@
+grafana:
+  enabled: true
+  adminPassword: "admin"
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - grafana.yashidevops.xyz
+    path: /
+    pathType: Prefix
+
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - prometheus.yashidevops.xyz
+    path: /
+    pathType: Prefix
+
+alertmanager:
+  ingress:
+    enabled: false
+
+kube-state-metrics:
+  enabled: true
+
+nodeExporter:
+  enabled: true
