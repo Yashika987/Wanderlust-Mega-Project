@@ -1,0 +1,12 @@
+namespace: wanderlust
+
+frontend:
+  serviceName: frontend-service
+  servicePort: 80
+
+ingress:
+  enabled: true
+  name: wanderlust-ingress
+  className: nginx
+  host: test.yashidevops.xyz
+  rewriteTarget: /

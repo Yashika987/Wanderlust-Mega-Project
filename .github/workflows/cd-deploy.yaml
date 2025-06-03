@@ -56,4 +56,9 @@ jobs:
             --namespace wanderlust \
             --set image.repository=$ECR_FRONTEND \
             --set image.tag=${{ github.event.inputs.image_tag }}
+      - name: Deploy Ingress chart
+        run: |
+          helm upgrade --install ingress ./wanderlust-chart/charts/ingress \
+            --namespace wanderlust
+
   
