@@ -2,7 +2,7 @@ namespace: wanderlust
 
 frontend:
   serviceName: frontend-service
-  servicePort: 80
+  servicePort: 5173
 
 ingress:
   enabled: true
